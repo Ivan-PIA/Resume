@@ -1,11 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
   // Загружаем сохраненные данные
-  document.querySelectorAll(".editable").forEach(el => {
-    const savedText = localStorage.getItem(el.className);
+  document.querySelectorAll(".editable").forEach((el, index) => {
+    const savedText = localStorage.getItem(`editable-${index}`);
     if (savedText) el.innerText = savedText;
 
     el.addEventListener("input", () => {
-      localStorage.setItem(el.className, el.innerText);
+      localStorage.setItem(`editable-${index}`, el.innerText);
     });
   });
 
@@ -18,6 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
       let ripple = document.createElement("span");
       ripple.style.left = `${x}px`;
       ripple.style.top = `${y}px`;
+      ripple.classList.add("ripple-effect"); // Добавляем класс для стилей ripple
       this.appendChild(ripple);
 
       setTimeout(() => {
